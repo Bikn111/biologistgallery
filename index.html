@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея великих биологов</title>
+    <link rel="icon" href="https://s.yimg.com/ny/api/res/1.2/l6FUi9H4njhElRJE568bTg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTk2MA--/https://media.zenfs.com/es/bbc_news_mundo_254/c34477d1675d5d066a1c3bbba424fcbd" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+      header {
+  opacity: 0;
+  animation: ani 2s forwards;
+}
+
+@keyframes ani {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #1a252f;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --gold-color: #f1c40f;
+            --silver-color: #bdc3c7;
+            --bronze-color: #cd7f32;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            transition: all 0.4s ease;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #02824a, #18dc35);
+            color: white;
+            text-align: center;
+            padding: 4rem 0 6rem;
+            margin-bottom: -2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            clip-path: ellipse(100% 100% at 50% 0%);
+        }
+        
+        .header-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"></path></svg>');
+            background-size: cover;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, var(--light-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            opacity: 0.9;
+            font-weight: 500;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .timeline-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            top: 50%;
+            left: 20px;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 0;
+            border-radius: 3px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 0.8rem;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .filter-btn {
+            padding: 0.8rem 1.8rem;
+            background-color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+        
+        .filter-btn i {
+            font-size: 1.1rem;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .filter-btn.active {
+            background-color: #258d35;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            background-color: var(--secondary-color);
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 5rem;
+            padding: 0 1rem;
+            position: relative;
+        }
+        
+        .intro::after {
+            content: "";
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color),#1fb414);
+            margin: 2.5rem auto;
+            border-radius: 2px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+        
+        .scientist {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .scientist::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+        
+        .scientist:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .scientist-img-container {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .scientist-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .scientist:hover .scientist-img {
+            transform: scale(1.1);
+        }
+        
+        .scientist-era {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .scientist-info {
+            padding: 2rem;
+        }
+        
+        .scientist-name {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        
+        .scientist-dates {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+        
+        .scientist-field {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .scientist-bio {
+            margin-bottom: 1.8rem;
+            line-height: 1.7;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: #555;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            gap: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        .read-more:hover {
+            color: var(--primary-color);
+        }
+        
+        .read-more i {
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        .full-bio {
+            display: none;
+            padding-top: 1.8rem;
+            border-top: 1px solid #eee;
+            margin-top: 1.8rem;
+        }
+        
+        .achievements-title {
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .achievements-list {
+            padding-left: 1.5rem;
+            margin: 0;
+        }
+        
+        .achievements-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .achievements-list li::before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            font-size: 1.2rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 16px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 3rem;
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1.8rem;
+            right: 1.8rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            line-height: 1;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent-color);
+            background-color: rgba(0, 0, 0, 0.05);
+            transform: rotate(90deg);
+        }
+        
+        .modal-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .modal-name {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .modal-dates {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 1.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .modal-field {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-bio {
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .modal-achievements h4 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .modal-achievements ul {
+            padding-left: 2rem;
+        }
+        
+        .modal-achievements li {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .modal-achievements li::before {
+            color: #00a92b;
+        }
+        
+        .nobel-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--gold-color), #e6b800);
+            color: #333;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-left: 0.8rem;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-link:hover {
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.95rem;
+            margin-top: 3rem;
+        }
+        
+        .decoration-element {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            z-index: 0;
+            opacity: 0.55;
+            pointer-events: none;
+        }
+        
+        .decoration-1 {
+            top: 15%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Emoji_u1f52c.svg/640px-Emoji_u1f52c.svg.png');
+            background-size: contain;
+        }
+        
+        
+        .decoration-3 {
+            top: 15%;
+            right: 8%;
+            animation: float 7s ease-in-out infinite reverse;
+            animation-delay: 0.5s;
+            background: url('https://cdn3.iconfinder.com/data/icons/medical-and-healthcare-flat-colored-volume-1/64/dna-1024.png') ;
+            background-size: contain;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        
+        .science-icon {
+            position: absolute;
+            font-size: 1.2rem;
+            color: rgba(0,0,0,0.1);
+            z-index: 0;
+        }
+        
+        /* Темная тема */
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .scientist {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .dark-mode .scientist:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .dark-mode .scientist-name {
+            color: #ffffff;
+        }
+        
+        .dark-mode .scientist-bio {
+            color: #b0b0b0;
+        }
+        
+        .dark-mode .scientist-field {
+            background-color: #2d2d2d;
+            color: #ffffff;
+        }
+        
+        .dark-mode .filter-buttons {
+            background: rgba(30,30,30,0.9);
+        }
+        
+        .dark-mode .filter-btn {
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark-mode .filter-btn:hover, .dark-mode .filter-btn.active {
+            background-color: #258d35;
+            color: white;
+        }
+        
+        .dark-mode .modal-content {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .modal-name {
+            color: #ffffff;
+        }
+        
+        .dark-mode .modal-bio {
+            color: #b0b0b0;
+        }
+        
+        .dark-mode .close-modal {
+            color: #b0b0b0;
+        }
+        
+        .dark-mode .close-modal:hover {
+            color: var(--accent-color);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .dark-mode .full-bio {
+            border-top-color: #333;
+        }
+        
+        .dark-mode .science-icon {
+            color: rgba(255,255,255,0.05);
+        }
+        
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            header {
+                padding: 3rem 0 5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .filter-buttons {
+                gap: 0.5rem;
+                padding: 0.8rem;
+                border-radius: 30px;
+            }
+            
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .modal-content {
+                padding: 2rem;
+            }
+            
+            .modal-name {
+                font-size: 2rem;
+            }
+            
+            .theme-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .filter-buttons {
+                gap: 0.3rem;
+                padding: 0.6rem;
+            }
+            
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+            }
+            
+            .modal-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-decoration"></div>
+        <div class="header-content">
+          <div class="menu info adise section animate__animated animate__fadeInUp">
+            <h1>Галерея великих биологов</h1>
+            <p class="subtitle">Ученые, изменившие наше понимание жизни. Исследуйте вклад выдающихся биологов в развитие науки через века.</p>
+          </div>
+        </div>
+        <div class="decoration-element decoration-1"></div>
+        <div class="decoration-element decoration-3"></div>
+    </header>
+    
+    <div class="container">
+        <div class="timeline-nav">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-globe"></i> Все эпохи
+                </button>
+                <button class="filter-btn" data-filter="ancient">
+                    <i class="fas fa-history"></i> Античность
+                </button>
+                <button class="filter-btn" data-filter="renaissance">
+                    <i class="fas fa-paint-brush"></i> Возрождение
+                </button>
+                <button class="filter-btn" data-filter="modern">
+                    <i class="fas fa-microscope"></i> Новое время
+                </button>
+                <button class="filter-btn" data-filter="contemporary">
+                    <i class="fas fa-flask"></i> Современность
+                </button>
+            </div>
+        </div>
+        
+        <section class="intro">
+            <h2>Знакомьтесь с великими умами биологии</h2>
+            <p>На этой странице представлены выдающиеся ученые, чьи открытия сформировали современную биологию и наши представления о живом мире</p>
+        </section>
+        
+        <section class="gallery" id="scientists-gallery">
+        </section>
+    </div>
+    
+    <div class="modal" id="scientist-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="" alt="" class="modal-img" id="modal-img">
+            <h2 id="modal-name"></h2>
+            <p class="modal-dates" id="modal-dates"></p>
+            <span class="modal-field" id="modal-field"></span>
+            <p class="modal-bio" id="modal-bio"></p>
+            <div class="modal-achievements" id="modal-achievements"></div>
+        </div>
+    </div>
+    
+    <div class="footer-wave"></div>
+    <button class="theme-toggle" id="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <script>
+        // Данные об ученых
+        const scientists = [
+            {
+                id: 1,
+                name: "Аристотель",
+                dates: "384-322 до н.э.",
+                era: "ancient",
+                field: "Философия, Биология",
+                img: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg",
+                bio: "Древнегреческий философ, основоположник формальной логики. Создал первую всеобъемлющую систему философии, которая включала изучение живых организмов. Его работы по биологии содержали описания более 500 видов животных.",
+                achievements: [
+                    "Основоположник зоологии",
+                    "Разработал первую классификацию животных",
+                    "Автор трудов 'История животных', 'О частях животных', 'О возникновении животных'"
+                ]
+            },
+            {
+                id: 2,
+                name: "Гален",
+                dates: "129-216",
+                era: "ancient",
+                field: "Медицина, Анатомия",
+                img: "https://sun9-34.userapi.com/impg/QuHk29pTFWzinrwAdxrSlqrzbL-VY_HVIG_fPg/UzM_iidfe6g.jpg?size=885x1080&quality=96&sign=e0ff01eeb67a4341e0606bd612bf970f&type=album",
+                bio: "Римский врач греческого происхождения, чьи теории доминировали в европейской медицине более 1000 лет. Проводил анатомические исследования на животных, так как вскрытие человеческих тел в то время было запрещено.",
+                achievements: [
+                    "Описал строение головного и спинного мозга",
+                    "Разработал теорию кровообращения",
+                    "Автор более 400 трудов по медицине и философии"
+                ]
+            },
+            {
+                id: 3,
+                name: "Андреас Везалий",
+                dates: "1514-1564",
+                era: "renaissance",
+                field: "Анатомия",
+                img: "https://i.pinimg.com/736x/8a/ee/2e/8aee2e5e7d0858ab1fc220f9aeae7c6e.jpg",
+                bio: "Фламандский анатом и врач, основоположник научной анатомии. В противовес Галену, основывал свои выводы на непосредственном наблюдении человеческого тела.",
+                achievements: [
+                    "Автор труда 'О строении человеческого тела' (1543)",
+                    "Исправил более 200 ошибок Галена",
+                    "Заложил основы современной анатомии"
+                ]
+            },
+            {
+                id: 4,
+                name: "Антони ван Левенгук",
+                dates: "1632-1723",
+                era: "modern",
+                field: "Микробиология",
+                img: "https://www.ourboox.com/wp-content/uploads/2022/02/%D0%9B%D0%B5%D0%B2%D0%B5%D0%BD%D0%B3%D1%83%D0%BA.jpg",
+                bio: "Голландский натуралист, конструктор микроскопов. Первым наблюдал и описал микроорганизмы, которые он назвал 'анималькули'.",
+                achievements: [
+                    "Первым наблюдал бактерии и простейших",
+                    "Описал строение красных кровяных телец",
+                    "Усовершенствовал микроскоп (до 300x увеличения)"
+                ]
+            },
+            {
+                id: 5,
+                name: "Карл Линней",
+                dates: "1707-1778",
+                era: "modern",
+                field: "Таксономия",
+                img: "https://comicvine.gamespot.com/a/uploads/scale_super/11161/111611786/9038841-r%2847%29.jpg",
+                bio: "Шведский естествоиспытатель и врач, создатель единой системы классификации растительного и животного мира. Ввел биноминальную номенклатуру для обозначения видов.",
+                achievements: [
+                    "Автор 'Системы природы' (1735)",
+                    "Разработал иерархическую классификацию живых организмов",
+                    "Описал около 7000 видов растений и 4000 видов животных"
+                ]
+            },
+            {
+                id: 6,
+                name: "Чарльз Дарвин",
+                dates: "1809-1882",
+                era: "modern",
+                field: "Эволюционная биология",
+                img: "https://s.yimg.com/ny/api/res/1.2/l6FUi9H4njhElRJE568bTg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTk2MA--/https://media.zenfs.com/es/bbc_news_mundo_254/c34477d1675d5d066a1c3bbba424fcbd",
+                bio: "Английский натуралист, основоположник теории эволюции путем естественного отбора. Его работа 'Происхождение видов' произвела революцию в биологии.",
+                achievements: [
+                    "Автор теории эволюции путем естественного отбора",
+                    "Основоположник эволюционной биологии",
+                    "Автор трудов 'Происхождение видов', 'Происхождение человека'"
+                ]
+            },
+            {
+                id: 7,
+                name: "Луи Пастер",
+                dates: "1822-1895",
+                era: "modern",
+                field: "Микробиология, Иммунология",
+                img: "https://cdn.ananasposter.ru/image/cache/catalog/poster/drugoe/80/28874-1000x830.jpg",
+                bio: "Французский микробиолог и химик, основоположник современной микробиологии и иммунологии. Разработал методы пастеризации и вакцинации.",
+                achievements: [
+                    "Разработал вакцины против бешенства и сибирской язвы",
+                    "Доказал микробную природу болезней",
+                    "Создал процесс пастеризации"
+                ]
+            },
+            {
+                id: 8,
+                name: "Иван Петрович Павлов",
+                dates: "1849-1936",
+                era: "modern",
+                field: "Физиология",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/%D0%98%D0%B2%D0%B0%D0%BD_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2.jpg/850px-%D0%98%D0%B2%D0%B0%D0%BD_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2.jpg",
+                bio: "Русский физиолог, лауреат Нобелевской премии по физиологии и медицине (1904) за исследования физиологии пищеварения. Создатель науки о высшей нервной деятельности.",
+                achievements: [
+                    "Открыл условные рефлексы",
+                    "Создал учение о высшей нервной деятельности",
+                    "Исследовал физиологию пищеварения (Нобелевская премия 1904)"
+                ],
+                nobel: true
+            },
+            {
+                id: 9,
+                name: "Николай Федорович Гамалея",
+                dates: "1859-1949",
+                era: "modern",
+                field: "Микробиология",
+                img: "https://avatars.dzeninfra.ru/get-zen_doc/2783222/pub_625d02c4bfc11c1065b6228f_625d14abe01e163901fd69e4/scale_1200",
+                bio: "Русский и советский врач, микробиолог и эпидемиолог. Один из основоположников бактериологии и иммунологии в России. Работал вместе с И.И. Мечниковым в Пастеровском институте.",
+                achievements: [
+                    "Организатор первой в России бактериологической станции",
+                    "Разработал методы профилактики бешенства и холеры",
+                    "Исследовал механизмы иммунитета"
+                ]
+            },
+            {
+                id: 10,
+                name: "Николай Константинович Кольцов",
+                dates: "1872-1940",
+                era: "modern",
+                field: "Генетика, Цитология",
+                img: "https://avatars.mds.yandex.net/i?id=703d9b0cc7a07ff5d017ded5e843d64a_l-4936286-images-thumbs&n=13",
+                bio: "Русский и советский биолог, основоположник экспериментальной биологии в России. Предложил гипотезу молекулярной основы наследственности, предвосхитив открытие ДНК.",
+                achievements: [
+                    "Предложил концепцию 'наследственных молекул' (1927)",
+                    "Основатель Института экспериментальной биологии",
+                    "Разработал методы культивирования тканей"
+                ]
+            },
+            {
+                id: 11,
+                name: "Сергей Сергеевич Четвериков",
+                dates: "1880-1959",
+                era: "modern",
+                field: "Генетика",
+                img: "https://museum.unn.ru/wp-content/uploads/sites/40/2021/04/1-MNNGUi-KP-2913.jpg",
+                bio: "Советский генетик, один из основателей эволюционной генетики. Связал законы Менделя с теорией Дарвина, заложив основы синтетической теории эволюции.",
+                achievements: [
+                    "Заложил основы популяционной генетики",
+                    "Исследовал генетическую структуру природных популяций",
+                    "Разработал концепцию 'генетического груза'"
+                ]
+            },
+            {
+                id: 12,
+                name: "Александр Флеминг",
+                dates: "1881-1955",
+                era: "contemporary",
+                field: "Микробиология",
+                img: "https://avatars.dzeninfra.ru/get-zen_doc/4421565/pub_60895c7f6579761c21f15f2c_60895d4bc462ef3a023b4477/scale_1200",
+                bio: "Шотландский бактериолог, лауреат Нобелевской премии по физиологии и медицине (1945) за открытие пенициллина - первого антибиотика.",
+                achievements: [
+                    "Открыл пенициллин (1928)",
+                    "Обнаружил лизоцим - антибактериальный фермент",
+                    "Заложил основы антибиотикотерапии"
+                ],
+                nobel: true
+            },
+            {
+                id: 13,
+                name: "Александр Иванович Опарин",
+                dates: "1894-1980",
+                era: "contemporary",
+                field: "Биохимия",
+                img: "https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_653f62cc4fc51d1090f8ad80_653f630f4fc51d1090f8c645/scale_1200",
+                bio: "Советский биохимик, создатель теории происхождения жизни на Земле. Предложил гипотезу возникновения жизни через постепенную химическую эволюцию углеродных соединений.",
+                achievements: [
+                    "Автор теории возникновения жизни (1924)",
+                    "Исследовал коацерваты как модели протоклеток",
+                    "Основатель советской школы биохимии"
+                ]
+            },
+            {
+                id: 14,
+                name: "Алексей Михайлович Оловников",
+                dates: "1936-2022",
+                era: "contemporary",
+                field: "Геронтология, Биология",
+                img: "https://www.trud.ru/userfiles/userfile/05-5.jpg",
+                bio: "Советский и российский биолог, автор гипотезы маргинотомии, объясняющей механизм старения клеток. Предсказал существование теломеразы до ее фактического открытия.",
+                achievements: [
+                    "Предложил теорию маргинотомии (1971)",
+                    "Предсказал существование теломеразы",
+                    "Разработал модель старения на основе укорочения теломер"
+                ]
+            },
+            {
+                id: 15,
+                name: "Николай Владимирович Тимофеев-Ресовский",
+                dates: "1900-1981",
+                era: "modern",
+                field: "Генетика, Радиобиология",
+                img: "https://avatars.dzeninfra.ru/get-zen_doc/3630505/pub_5f030e1d57d235646298cad0_5f030eac11adbb1bb13fb8e1/scale_1200",
+                bio: "Советский биолог, генетик, один из основоположников радиационной генетики и популяционной генетики. Работал в Германии, где вместе с Максом Дельбрюком разработал модель гена.",
+                achievements: [
+                    "Один из создателей современной радиобиологии",
+                    "Разработал концепцию 'мишени' в радиобиологии",
+                    "Внес значительный вклад в развитие эволюционной генетики"
+                ]
+            },
+            {
+                id: 16,
+                name: "Розалинд Франклин",
+                dates: "1920-1958",
+                era: "contemporary",
+                field: "Биофизика, Кристаллография",
+                img: "https://avatars.mds.yandex.net/i?id=4acc78b262a7979defbcbdae62e0ab61-2037526-images-thumbs&n=13",
+                bio: "Английский биофизик и кристаллограф, чьи рентгеновские снимки ДНК были ключевыми для открытия ее двойной спиральной структуры. Ее работа была использована Уотсоном и Криком без должного признания.",
+                achievements: [
+                    "Получила ключевые рентгенограммы ДНК",
+                    "Внесла вклад в изучение структуры вирусов",
+                    "Исследовала структуру угля и графита"
+                ]
+            },
+            {
+                id: 17,
+                name: "Иосиф Абрамович Рапопорт",
+                dates: "1912-1990",
+                era: "contemporary",
+                field: "Генетика",
+                img: "https://avatars.dzeninfra.ru/get-zen_doc/3700776/pub_63d27eaae3486a77e1f3ad3d_63d286433391305389fd0edf/scale_1200",
+                bio: "Советский генетик, один из первооткрывателей химического мутагенеза. Несмотря на преследования во времена лысенковщины, продолжал научную работу и внес значительный вклад в генетику.",
+                achievements: [
+                    "Открыл химический мутагенез (совместно с Шарлоттой Ауэрбах)",
+                    "Исследовал механизмы мутагенеза",
+                    "Внес вклад в селекцию сельскохозяйственных растений"
+                ]
+            },
+            {
+                id: 18,
+                name: "Джеймс Уотсон и Фрэнсис Крик",
+                dates: "1928- и 1916-2004",
+                era: "contemporary",
+                field: "Молекулярная биология",
+                img: "https://i.bigenc.ru/resizer/resize?sign=0_15k_9ulx5k1di0Qyoa4w&filename=vault/b622ada275393b9e223ef20138c126bf.webp&width=3840",
+                bio: "Американский и британский ученые, лауреаты Нобелевской премии по физиологии и медицине (1962) за открытие структуры ДНК. Их модель двойной спирали ДНК стала основой молекулярной биологии.",
+                achievements: [
+                    "Предложили модель двойной спирали ДНК (1953)",
+                    "Заложили основы молекулярной биологии",
+                    "Расшифровали генетический код"
+                ],
+                nobel: true
+            },
+            {
+                id: 19,
+                name: "Крэйг Вентер",
+                dates: "1946-",
+                era: "contemporary",
+                field: "Геномика",
+                img: "https://www.japantimes.co.jp/uploads/imported_images/uploads/2014/05/w3-venter-a-20140507.jpg",
+                bio: "Американский биолог и предприниматель, пионер в области секвенирования геномов. Возглавлял частный проект по секвенированию генома человека параллельно с государственным проектом.",
+                achievements: [
+                    "Участвовал в секвенировании генома человека",
+                    "Создал первую синтетическую бактериальную клетку",
+                    "Основал институт J. Craig Venter Institute"
+                ]
+            },
+            {
+                id: 20,
+                name: "Элизабет Блэкберн",
+                dates: "1948-",
+                era: "contemporary",
+                field: "Молекулярная биология",
+                img: "https://www.hatch-mag.com/wp-content/uploads/2017/08/elizabeth-blackburn-salk-institute-820x509.jpg",
+                bio: "Австралийско-американский ученый, лауреат Нобелевской премии по физиологии и медицине (2009) за открытие механизма защиты хромосом теломерами и фермента теломеразы.",
+                achievements: [
+                    "Открыла теломеразы - фермент, удлиняющий теломеры",
+                    "Исследовала роль теломер в старении и раке",
+                    "Внесла вклад в понимание клеточного старения"
+                ],
+                nobel: true
+            },
+            {
+                id: 21,
+                name: "Дженнифер Дудна и Эммануэль Шарпантье",
+                dates: "1964- и 1968-",
+                era: "contemporary",
+                field: "Биохимия",
+                img: "https://s0.rbk.ru/v6_top_pics/media/img/4/83/756020724045834.jpg",
+                bio: "Американский и французский ученые, лауреаты Нобелевской премии по химии (2020) за разработку метода редактирования генома CRISPR-Cas9. Их открытие произвело революцию в генной инженерии.",
+                achievements: [
+                    "Разработали метод CRISPR-Cas9 для редактирования генов",
+                    "Открыли механизм бактериального иммунитета",
+                    "Заложили основы современной генной терапии"
+                ],
+                nobel: true
+            }
+        ];
+
+        // Инициализация галереи
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallery = document.getElementById('scientists-gallery');
+            const modal = document.getElementById('scientist-modal');
+            const modalContent = document.querySelector('.modal-content');
+            const closeModal = document.querySelector('.close-modal');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const themeToggle = document.getElementById('theme-toggle');
+            
+            // Создаем декоративные элементы
+            function createDecorations() {
+                const container = document.querySelector('.container');
+                const scienceIcons = ['dna', 'microscope', 'atom', 'flask', 'seedling', 'virus'];
+                
+                for (let i = 0; i < 20; i++) {
+                    const icon = document.createElement('i');
+                    icon.className = `science-icon fas fa-${scienceIcons[Math.floor(Math.random() * scienceIcons.length)]}`;
+                    icon.style.top = `${Math.random() * 100}%`;
+                    icon.style.left = `${Math.random() * 100}%`;
+                    icon.style.fontSize = `${Math.random() * 1 + 0.5}rem`;
+                    icon.style.opacity = Math.random() * 0.1 + 0.05;
+                    icon.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    container.appendChild(icon);
+                }
+            }
+            
+            // Отображение всех ученых
+            function displayScientists(scientistsToDisplay) {
+                gallery.innerHTML = '';
+                
+                scientistsToDisplay.forEach(scientist => {
+                    const scientistCard = document.createElement('article');
+                    scientistCard.className = `scientist ${scientist.era}`;
+                    scientistCard.dataset.id = scientist.id;
+                    
+                    // Добавляем значок Нобелевской премии если есть
+                    const nobelBadge = scientist.nobel ? '<span class="nobel-badge"><i class="fas fa-medal"></i> Нобелевский лауреат</span>' : '';
+                    
+                    scientistCard.innerHTML = `
+                        <div class="scientist-img-container">
+                            <img src="${scientist.img}" alt="${scientist.name}" class="scientist-img" loading="lazy">
+                            <span class="scientist-era">${getEraName(scientist.era)}</span>
+                        </div>
+                        <div class="scientist-info">
+                            <h3 class="scientist-name">${scientist.name} ${nobelBadge}</h3>
+                            <p class="scientist-dates">${scientist.dates}</p>
+                            <span class="scientist-field">${scientist.field}</span>
+                            <p class="scientist-bio">${scientist.bio}</p>
+                            <a class="read-more">Подробнее <i class="fas fa-arrow-right"></i></a>
+                            <div class="full-bio">
+                                <h4 class="achievements-title"><i class="fas fa-trophy"></i> Основные достижения:</h4>
+                                <ul class="achievements-list">
+                                    ${scientist.achievements.map(ach => `<li>${ach}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                    
+                    gallery.appendChild(scientistCard);
+                });
+                
+                // Добавляем обработчики событий для карточек
+                document.querySelectorAll('.scientist').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        if (!e.target.classList.contains('read-more') && !e.target.closest('.read-more')) return;
+                        
+                        const scientistId = parseInt(this.dataset.id);
+                        const scientist = scientists.find(s => s.id === scientistId);
+                        
+                        if (scientist) {
+                            openModal(scientist);
+                        }
+                    });
+                });
+            }
+            
+            // Открытие модального окна
+            function openModal(scientist) {
+                document.getElementById('modal-img').src = scientist.img;
+                document.getElementById('modal-img').alt = scientist.name;
+                
+                // Добавляем значок Нобелевской премии если есть
+                const nobelBadge = scientist.nobel ? '<span class="nobel-badge"><i class="fas fa-medal"></i> Нобелевская премия</span>' : '';
+                
+                document.getElementById('modal-name').innerHTML = `${scientist.name} ${nobelBadge}`;
+                document.getElementById('modal-dates').textContent = scientist.dates;
+                document.getElementById('modal-field').textContent = scientist.field;
+                document.getElementById('modal-bio').textContent = scientist.bio;
+                
+                const achievementsList = scientist.achievements.map(ach => `<li>${ach}</li>`).join('');
+                document.getElementById('modal-achievements').innerHTML = `
+                    <h4 class="achievements-title"><i class="fas fa-trophy"></i> Основные достижения:</h4>
+                    <ul class="achievements-list">${achievementsList}</ul>
+                `;
+                
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Закрытие модального окна
+            function closeModalFunc() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Получение названия эпохи
+            function getEraName(era) {
+                const eras = {
+                    'ancient': 'Античность',
+                    'renaissance': 'Возрождение',
+                    'modern': 'Новое время',
+                    'contemporary': 'Современность'
+                };
+                return eras[era] || era;
+            }
+            
+            // Фильтрация ученых
+            function filterScientists() {
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                
+                let filteredScientists = scientists.filter(scientist => {
+                    return activeFilter === 'all' || scientist.era === activeFilter;
+                });
+                
+                displayScientists(filteredScientists);
+            }
+            
+            // Переключение темы
+            function toggleTheme() {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDark);
+                
+                const icon = themeToggle.querySelector('i');
+                icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            }
+            
+            // Инициализация темы
+            function initTheme() {
+                const darkMode = localStorage.getItem('darkMode') === 'true';
+                if (darkMode) {
+                    document.body.classList.add('dark-mode');
+                    const icon = themeToggle.querySelector('i');
+                    icon.className = 'fas fa-sun';
+                }
+            }
+            
+            // Обработчики событий
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    filterScientists();
+                });
+            });
+            
+            closeModal.addEventListener('click', closeModalFunc);
+            
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModalFunc();
+                }
+            });
+            
+            window.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    closeModalFunc();
+                }
+            });
+            
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            // Инициализация
+            initTheme();
+            createDecorations();
+            displayScientists(scientists);
+        });
+    </script>
+</body>
+</html>
